@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <nav>
+        <a href="/logs/new">Create a Log?</a>
+    </nav>
+    <h1>Logs Index Page '^ '</h1>
+    <ul>
+        <% for (let i = 0; i < logs.length; i++){ %>
+            <li>
+                
+                Title: <%=logs[i].title  %>
+
+            </li>
+        <% } %>
+    </ul>
+</body>
+</html>
