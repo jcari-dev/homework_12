@@ -18,7 +18,7 @@ mongoose.connection.once('open', () => {
 
 
 
-//Index Route
+// Index Route
 
 app.get('/logs', (req, res) => {
 
@@ -30,7 +30,7 @@ app.get('/logs', (req, res) => {
     });
 });
 
-//Edit Route
+// Edit Route
 
 app.get('/logs/:title/edit', (req, res) => {
     Logs.findById(req.params.title, (err, logsFound) => {
@@ -54,13 +54,28 @@ app.get('/logs/:title', (req, res) => {
     })
 })
 
+// Put Request
 
-//New Route
+app.put('/logs/:id', (req, res) => {
+    if (req.body.shipIsBroken === 'on') {
+        req.body.shipIsBroken = true;
+    } else {
+        req.body.shipIsBroken = false;
+
+    }
+    Logs.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updateModel) => {
+        res.render('index.ejs');
+    });
+});
+
+
+// New Route
 
 app.get('/logs/new', (req, res) => {
 
     res.render('new.ejs');
 })
+
 
 // Delete Route 
 
