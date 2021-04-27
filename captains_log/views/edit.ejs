@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Edit Logs Page</h1>
+    <form action="/logs/<%=logs.title%>?_method=PUT" method="POST">
+        Title: <input type="text" name="title" value="<%=logs.title%>"><br/> Entry: <input type="text" name="entry" value="<%=logs.entry%>"><br/>
+
+        <% if (logs.shipIsBroken === true) { %>
+            checked
+            <%} %>
+                Ship Damage Status: <input type="checkbox" name="shipIsBroken" value="<%=logs.shipIsBroken%>"><br/>
+                <input type="submit" name="" value="Submit Changes" />
+    </form>
+</body>
+
+</html>

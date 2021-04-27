@@ -30,16 +30,26 @@ app.get('/logs', (req, res) => {
     });
 });
 
+//Edit Route
+
+app.get('/logs/:title/edit', (req, res) => {
+    Logs.findById(req.params.title, (err, logsFound) => {
+        res.render('edit.ejs', {
+            logs: logsFound
+        });
+    });
+});
+
 
 // Show Route
 
 
-app.get('/logs/:entry', (req, res) => {
+app.get('/logs/:title', (req, res) => {
     //console.log(Logs.title,Logs)
-    Logs.findById(req.params.title, (err, foundLog) => {
+    Logs.findOne(req.params.title, (err, foundLog) => {
         //console.log(foundLog)
         res.render('show.ejs', {
-            log: foundLog
+            logs: foundLog
         })
     })
 })
@@ -54,7 +64,7 @@ app.get('/logs/new', (req, res) => {
 
 // Delete Route 
 
-app.delete('/logs/:title', (req, res) => {
+app.delete('/logs/:id', (req, res) => {
     res.send('deleting...')
 });
 
@@ -74,15 +84,7 @@ app.post('/logs/', (req, res) => {
 
 });
 
-//Edit Route
 
-app.get('/logs/:title/edit', (req, res) => {
-    Logs.findById(req.params.title, (err, logsFound) => {
-        res.render('edit.ejs', {
-            logs: logsFound
-        });
-    });
-});
 
 //Listening Check
 
