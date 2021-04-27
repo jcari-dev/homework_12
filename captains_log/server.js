@@ -5,9 +5,15 @@ const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
 const Logs = require('./models/logs.js');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser')
+
+
+// import LogsController from '.controllers/logs.js'
+
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(bodyParser.json());
 
 // Mongo Stuff
 
@@ -24,18 +30,19 @@ app.get('/logs', (req, res) => {
 
     Logs.find({}, (error, allLogs) => {
         res.render('index.ejs', {
-            logs: allLogs
+            Logs: allLogs
 
         });
-    });
+    })
 });
+
 
 // Edit Route
 
 app.get('/logs/:title/edit', (req, res) => {
     Logs.findById(req.params.title, (err, logsFound) => {
         res.render('edit.ejs', {
-            logs: logsFound
+            Logs: logsFound
         });
     });
 });
@@ -44,12 +51,12 @@ app.get('/logs/:title/edit', (req, res) => {
 // Show Route
 
 
-app.get('/logs/:title', (req, res) => {
+app.get('/logs/:id', (req, res) => {
     //console.log(Logs.title,Logs)
-    Logs.findOne(req.params.title, (err, foundLog) => {
-        //console.log(foundLog)
+    Logs.findById(req.params.id, (err, logsFound) => {
+
         res.render('show.ejs', {
-            logs: foundLog
+            Logs: logsFound
         })
     })
 })
