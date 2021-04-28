@@ -18,16 +18,17 @@
             <li>
 
                 Title:
-                <a href="/logs/<%=logs[i].title%>">
+                <a href="/logs/<%=[i]%>">
                     <%=logs[i].title  %>
-                        <a href="/logs/<%=logs[i].title; %>/edit">Edit</a>
+                        <a href="/logs/<%=logs[i].id%>/edit">Edit</a>
                 </a>
-                <form>
+                <form action="/logs/<%=logs[i].id%>?_method=DELETE" method="POST">
                     <input type="submit" value="DELETE" />
                 </form>
             </li>
             <% } %>
     </ul>
+
 </body>
 
 </html>

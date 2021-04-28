@@ -10,8 +10,9 @@
 
 <body>
     <h1>Edit Logs Page</h1>
-    <form action="/logs/<%=logs.title%>?_method=PUT" method="POST">
-        Title: <input type="text" name="title" value="<%=logs.title%>"><br/> Entry: <input type="text" name="entry" value="<%=logs.entry%>"><br/>
+    <form action="/logs/<%=logs.id%>?_method=PUT" method="POST">
+        Title: <input type="text" name="title" value="<%=logs.title%>">
+        <br/> Entry: <input type="text" name="entry" value="<%=logs.entry%>"><br/>
 
         <% if (logs.shipIsBroken === true) { %>
             checked

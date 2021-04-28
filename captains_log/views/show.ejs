@@ -12,16 +12,16 @@
     <h1>Logs Show Page '^ '</h1>
     <div>
         Title:
-        <%=Logs.title%>
+        <%=logs.title%>
     </div>
     <div>
         Entry:
-        <%=Logs.entry%>
+        <%=logs.entry%>
     </div>
 
     <div>
         Is the ship broken:
-        <% if (Logs.shipIsBroken === true) { %>
+        <% if (logs.shipIsBroken === true) { %>
             <span> Yes </span>
             <% } else { %>
                 <span> No </span>

@@ -30,50 +30,12 @@ app.get('/logs', (req, res) => {
 
     Logs.find({}, (error, allLogs) => {
         res.render('index.ejs', {
-            Logs: allLogs
+            logs: allLogs
 
         });
     })
 });
 
-
-// Edit Route
-
-app.get('/logs/:title/edit', (req, res) => {
-    Logs.findById(req.params.title, (err, logsFound) => {
-        res.render('edit.ejs', {
-            Logs: logsFound
-        });
-    });
-});
-
-
-// Show Route
-
-
-app.get('/logs/:id', (req, res) => {
-    //console.log(Logs.title,Logs)
-    Logs.findById(req.params.id, (err, logsFound) => {
-
-        res.render('show.ejs', {
-            Logs: logsFound
-        })
-    })
-})
-
-// Put Request
-
-app.put('/logs/:id', (req, res) => {
-    if (req.body.shipIsBroken === 'on') {
-        req.body.shipIsBroken = true;
-    } else {
-        req.body.shipIsBroken = false;
-
-    }
-    Logs.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updateModel) => {
-        res.render('index.ejs');
-    });
-});
 
 
 // New Route
@@ -84,10 +46,56 @@ app.get('/logs/new', (req, res) => {
 })
 
 
+// Edit Route
+
+app.get('/logs/:id/edit', (req, res) => {
+    Logs.findById(req.params.id, (err, logsFound) => {
+        res.render('edit.ejs', {
+            logs: logsFound
+        });
+    });
+});
+
+// Put Request
+
+app.put('/logs/:id', (req, res) => {
+    if (req.body.shipIsBroken === 'on') {
+        req.body.shipIsBroken = true;
+    } else {
+        req.body.shipIsBroken = false;
+    }
+    Logs.findOneAndUpdate(req.params.id, req.body, { new: true }, (err, updatedLog) => {
+
+        res.redirect('/logs/')
+    })
+});
+
+// Show Route
+// app.get('/logs/:id', (req, res) => {
+
+//         Logs.find({}, (error, getLog) => {
+//             res.render('show.ejs', {
+//                 logs: getLog[req.params.id]
+//             })
+//         })
+//     })
+app.get('/logs/:id', (req, res) => {
+    //console.log(Logs.title,Logs)
+    Logs.find({}, (err, logsFound) => {
+        res.render('show.ejs', {
+            logs: logsFound[req.params.id]
+        })
+    })
+})
+
+
+
 // Delete Route 
 
 app.delete('/logs/:id', (req, res) => {
-    res.send('deleting...')
+    Logs.findOneAndDelete({ _id: req.params.id }, (err, deletedLogs) => {
+        res.redirect('/logs');
+    })
 });
 
 // Create Route
